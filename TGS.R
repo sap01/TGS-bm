@@ -72,35 +72,32 @@ rm(input_args)
 ## Begin: Create the output directory
 ##------------------------------------------------------------
 
-## Output directory name
+## Create output dir name
 output_dirname <-
   paste('output', format(Sys.time(), "%Y%m%d%H%M%S"), sep = '')
 
+## Create output dir path
+output_dirname <- paste(init_path, 
+                        'asset', 
+                        output_dirname, 
+                        sep = '/')
+
 if (.Platform$OS.type == 'windows') {
-  if (!output_dirname %in% shell("ls asset" , intern = TRUE)) {
-    ## Output directory name for Windows OSes
-    output_dirname <- paste('asset', output_dirname, sep = '/')
-    output_dirname <- paste(init_path, output_dirname, sep = '/')
     
-    ## Convert directory path to canonical form for the Windows OS.
+    ## Convert directory path to canonical form for Windows.
     ## It raises the warning if the directory does not exist, which
     ## is expected. Therefore, please ignore the warning.
     output_dirname <-
-      normalizePath(output_dirname, winslash = '\\', mustWork = NA)
+      normalizePath(output_dirname, 
+                    winslash = '\\', 
+                    mustWork = NA)
     
     shell(paste('mkdir ', output_dirname, sep = ''),
           intern = TRUE,
-          mustWork = NA)
-  }
-} else {
-  if (.Platform$OS.type == 'unix') {
-    if (!output_dirname %in% system("ls asset" , intern = TRUE)) {
-      output_dirname <- paste('asset', output_dirname, sep = '/')
-      output_dirname <- paste(init_path, output_dirname, sep = '/')
+          mustWork = TRUE)
+} else if (.Platform$OS.type == 'unix') {
       
       system(paste('mkdir ', output_dirname, sep = ''))
-    }
-  }
 }
 
 ##------------------------------------------------------------
@@ -110,6 +107,20 @@ if (.Platform$OS.type == 'windows') {
 ##------------------------------------------------------------
 ## Begin: Read User-defined input Params
 ##------------------------------------------------------------
+print(json_file)
+
+if (.Platform$OS.type == 'windows') {
+
+  ## Convert directory path to canonical form for Windows.
+  ## It raises the warning if the directory does not exist, which
+  ## is expected. Therefore, please ignore the warning.
+  json_file <-
+    normalizePath(json_file,
+                  winslash = '\\',
+                  mustWork = NA)
+}
+print(json_file)
+
 input_params <- rjson::fromJSON(file = json_file)
 rm(json_file)
 

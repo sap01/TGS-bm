@@ -17,6 +17,12 @@ Source: Bioconductor
 Version: 3.8.0
 Hash: 761d981e13b5100ec443b88b99ec5630
 
+Package: TGS
+Source: Bioconductor
+Version: 1.0.1
+Hash: a237796683050c9f4da60f6c3e2c06e8
+Requires: bnstruct, doParallel, foreach, ggm, minet, rjson
+
 Package: bitops
 Source: CRAN
 Version: 1.0-6
