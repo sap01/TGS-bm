@@ -107,20 +107,6 @@ if (.Platform$OS.type == 'windows') {
 ##------------------------------------------------------------
 ## Begin: Read User-defined input Params
 ##------------------------------------------------------------
-print(json_file)
-
-if (.Platform$OS.type == 'windows') {
-
-  ## Convert directory path to canonical form for Windows.
-  ## It raises the warning if the directory does not exist, which
-  ## is expected. Therefore, please ignore the warning.
-  json_file <-
-    normalizePath(json_file,
-                  winslash = '\\',
-                  mustWork = NA)
-}
-print(json_file)
-
 input_params <- rjson::fromJSON(file = json_file)
 rm(json_file)
 
@@ -146,8 +132,8 @@ rm(input_params)
 
 ## Run algorithm TGS
 TGS::LearnTgs(
-  isfile = 1,
-  json.file = json_file,
+  isfile = 0,
+  json.file = '',
   input.dirname = input_dirname,
   input.data.filename = input.data.filename,
   num.timepts = num.timepts,
