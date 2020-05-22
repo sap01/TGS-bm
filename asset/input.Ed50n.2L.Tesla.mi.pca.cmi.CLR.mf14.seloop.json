@@ -1,0 +1,15 @@
+{ 
+   "input.data.filename": "edi-data-50n.tsv",
+   "num.timepts": 21,
+   "true.net.filename": "edi.net.50.adj.mx.RData",
+   "input.wt.data.filename": "",
+   "is.discrete": false,
+   "num.discr.levels": 2,
+   "discr.algo": "discretizeData.2L.Tesla",
+   "mi.estimator": "mi.pca.cmi",
+   "apply.aracne": false,
+   "clr.algo": "CLR",
+   "max.fanin": 14,
+   "allow.self.loop": true,
+   "scoring.func": "BIC"
+}
